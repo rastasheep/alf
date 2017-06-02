@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# script/server: Launch the application and any extra required processes locally.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+go-wrapper download
+go-wrapper install
+go-wrapper download github.com/pilu/fresh
+
+go-wrapper run fresh

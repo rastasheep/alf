@@ -1,0 +1,21 @@
+version: "2"
+services:
+  api:
+    image: golang:1.8
+    working_dir: ${GOLANG_DESTINATION_PATH}
+    volumes:
+      - ${API_APP_PATH}:${GOLANG_DESTINATION_PATH}:cached
+    depends_on:
+      - postgres
+    ports:
+      - 3000:3000
+    command: script/server
+
+  postgres:
+    image: postgres:9.6-alpine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:cached
+      - ${DOCKER_SCRIPTS_PATH}/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:cached
+
+volumes:
+  postgres-data:
