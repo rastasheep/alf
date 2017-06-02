@@ -1,2 +1,5 @@
 .docker-sync/
 .env
+
+# dist files
+application/api/build/*

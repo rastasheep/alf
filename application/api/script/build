@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# script/build: Build executable for supported oses.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+go-wrapper download
+
+for GOOS in darwin linux; do
+  for GOARCH in 386 amd64; do
+    export GOOS=$GOOS
+    export GOARCH=$GOARCH
+    export CGO_ENABLED=0
+    go build -o build/alf-$GOOS-$GOARCH
+  done
+done
