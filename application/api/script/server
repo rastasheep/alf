@@ -8,6 +8,6 @@ cd "$(dirname "$0")/.."
 
 go-wrapper download
 go-wrapper install
-go-wrapper download github.com/pilu/fresh
+go get github.com/pilu/fresh
 
-go-wrapper run fresh
+RUNNER_TMP_PATH=/tmp fresh
