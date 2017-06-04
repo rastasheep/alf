@@ -1,14 +1,16 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
-
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 
+	"database/sql"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -46,9 +48,33 @@ func createExecution(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 	}
 	defer r.Body.Close()
 
-	log.Printf("executing query : %v", e.Query)
+	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
+	matched := re.MatchString(e.Query)
+	if matched {
+		log.Printf("blocked execution of query: %v", e.Query)
+		respondWithError(w, http.StatusBadRequest, "pq: you are not allowed to change the characteristics of the current transaction")
+		return
+	}
 
-	rows, err := db.Queryx(e.Query)
+	log.Printf("executing query: %v", e.Query)
+
+	tx, err := db.BeginTxx(context.Background(), &sql.TxOptions{
+		ReadOnly:  false,
+		Isolation: sql.LevelDefault,
+	})
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	_, err = tx.Exec("SET TRANSACTION READ ONLY;")
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	rows, err := tx.Queryx(e.Query)
+
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, err.Error())
 		return
@@ -67,6 +93,7 @@ func createExecution(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 
 		data = append(data, entry)
 	}
+	tx.Commit()
 
 	respondWithJSON(w, http.StatusCreated, data)
 }
