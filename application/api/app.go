@@ -82,6 +82,7 @@ func createExecution(w http.ResponseWriter, r *http.Request, _ httprouter.Params
 
 	data := make([]map[string]interface{}, 0)
 
+	defer rows.Close()
 	for rows.Next() {
 		entry := make(map[string]interface{})
 
