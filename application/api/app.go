@@ -1,26 +1,34 @@
 package main
 
 import (
-	"context"
-	"encoding/json"
+	"flag"
 	"fmt"
-	"github.com/julienschmidt/httprouter"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
-	"regexp"
 
-	"database/sql"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
-var db *sqlx.DB
+var (
+	dbConnection = flag.String("db-connection", "", "Connection to read only database")
+	env          = flag.String("env", "development", "Application environment")
+)
 
-type execution struct {
-	ID    int    `json:"id"`
-	Query string `json:"query"`
-	Name  string `json:"name"`
+type Server struct {
+	db     *sqlx.DB
+	logger *log.Logger
+}
+
+type Adapter func(http.Handler) http.Handler
+
+func Adapt(h http.Handler, adapters ...Adapter) http.Handler {
+	for _, adapter := range adapters {
+		h = adapter(h)
+	}
+	return h
 }
 
 func NewDB(config string) *sqlx.DB {
@@ -35,97 +43,28 @@ func NewDB(config string) *sqlx.DB {
 	return db
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprintf(w, "This is the RESTful api")
-}
-
-func createExecution(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	var e execution
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&e); err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
-		return
-	}
-	defer r.Body.Close()
-
-	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
-	matched := re.MatchString(e.Query)
-	if matched {
-		log.Printf("blocked execution of query: %v", e.Query)
-		respondWithError(w, http.StatusBadRequest, "pq: you are not allowed to change the characteristics of the current transaction")
-		return
-	}
-
-	log.Printf("executing query: %v", e.Query)
-
-	tx, err := db.BeginTxx(context.Background(), &sql.TxOptions{
-		ReadOnly:  false,
-		Isolation: sql.LevelDefault,
-	})
-	if err != nil {
-		respondWithError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	_, err = tx.Exec("SET TRANSACTION READ ONLY;")
-	if err != nil {
-		respondWithError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	rows, err := tx.Queryx(e.Query)
-
-	if err != nil {
-		respondWithError(w, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	data := make([]map[string]interface{}, 0)
-
-	defer rows.Close()
-	for rows.Next() {
-		entry := make(map[string]interface{})
-
-		err := rows.MapScan(entry)
-		if err != nil {
-			respondWithError(w, http.StatusBadRequest, err.Error())
-			return
-		}
-
-		data = append(data, entry)
-	}
-	tx.Commit()
-
-	respondWithJSON(w, http.StatusCreated, data)
-}
-
-func respondWithError(w http.ResponseWriter, code int, message string) {
-	respondWithJSON(w, code, map[string]string{"error": message})
-}
-
-func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
-	response, _ := json.Marshal(payload)
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	w.Write(response)
-}
-
 func main() {
-	db = NewDB(os.Getenv("DB_CONNECTION"))
+	flag.Parse()
+	logger := log.New(os.Stdout, "[request] ", 0)
+
+	db := NewDB(*dbConnection)
 	defer db.Close()
 
-	router := httprouter.New()
-	router.GET("/", indexHandler)
-	router.POST("/executions", createExecution)
+	respOptions := RespondOptions()
+	server := Server{db, logger}
 
-	// print env
-	env := os.Getenv("APP_ENV")
-	if env == "production" {
-		log.Println("Running api server in production mode")
-	} else {
-		log.Println("Running api server in dev mode")
-	}
+	router := mux.NewRouter()
+	router.Handle("/executions", Adapt(
+		http.HandlerFunc(server.listExecutions),
+		JSONResponse(respOptions),
+	)).Methods("GET")
 
-	http.ListenAndServe(":3000", router)
+	router.Handle("/executions", Adapt(
+		http.HandlerFunc(server.createExecution),
+		JSONResponse(respOptions),
+	)).Methods("POST")
+
+  logger.Println("Running api server in %v mode", env)
+
+	log.Fatal(http.ListenAndServe(":3000", Adapt(router, Logger(logger))))
 }

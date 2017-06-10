@@ -8,6 +8,5 @@ cd "$(dirname "$0")/.."
 
 go-wrapper download
 go-wrapper install
-go get github.com/pilu/fresh
 
-RUNNER_TMP_PATH=/tmp fresh
+go-wrapper run --db-connection=$DB_CONNECTION --env=$APP_ENV
