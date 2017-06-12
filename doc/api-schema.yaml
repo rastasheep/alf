@@ -1,0 +1,108 @@
+swagger: '2.0'
+info:
+  title: Alf API
+  description: 'https://github.com/rastasheep/alf'
+  version: 0.0.1
+produces:
+  - application/json
+paths:
+  /executions:
+    post:
+      summary: Create an execution
+      parameters:
+        - name: body
+          description: Query string to be executed
+          schema:
+            $ref: '#/definitions/Execution#query'
+          in: body
+          required: true
+      responses:
+        '200':
+          description: Newly created execution
+          schema:
+            $ref: '#/definitions/Execution'
+      tags:
+        - Executions
+  '/executions/{id}':
+    get:
+      summary: Get a single execution
+      parameters:
+        - name: id
+          in: path
+          description: Execution ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Execution
+          schema:
+            $ref: '#/definitions/Execution'
+        '404':
+          description: Not Found
+      tags:
+        - Executions
+    delete:
+      summary: Delete a execution
+      parameters:
+        - name: id
+          in: path
+          description: Execution ID
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+      tags:
+        - Executions
+  /schema:
+    get:
+      summary: Get a DB schema
+      responses:
+        '200':
+          description: List of column definitionas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ColumnDefinition'
+      tags:
+        - Schema
+parameters: {}
+definitions:
+  Execution:
+    type: object
+    properties:
+      id:
+        type: integer
+        readOnly: true
+        description: Unique ID for the execution
+      query:
+        type: string
+        description: Query to be executed
+        example: SELECT * FROM user;
+    required:
+      - id
+      - query
+  ColumnDefinition:
+    type: object
+    properties:
+      table_name:
+        type: string
+        readOnly: true
+        description: Name of the table where column is defined
+        example: users
+      column_name:
+        type: string
+        readOnly: true
+        description: Name of the column
+        example: username
+      data_type:
+        type: string
+        readOnly: true
+        description: Column type
+        example: text
+    required:
+      - table_name
+      - column_name
+      - data_type
