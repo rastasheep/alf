@@ -52,8 +52,13 @@ func main() {
 
 	respOptions := RespondOptions()
 	server := Server{db, logger}
-
 	router := mux.NewRouter()
+
+	router.Handle("/schema", Adapt(
+		http.HandlerFunc(server.getSchema),
+		JSONResponse(respOptions),
+	)).Methods("GET")
+
 	router.Handle("/executions", Adapt(
 		http.HandlerFunc(server.listExecutions),
 		JSONResponse(respOptions),
@@ -64,7 +69,7 @@ func main() {
 		JSONResponse(respOptions),
 	)).Methods("POST")
 
-  logger.Println("Running api server in %v mode", env)
+	logger.Printf("Running api server in %s mode\n", *env)
 
 	log.Fatal(http.ListenAndServe(":3000", Adapt(router, Logger(logger))))
 }
