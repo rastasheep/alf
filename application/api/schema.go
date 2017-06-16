@@ -14,7 +14,7 @@ type SchemaItem struct {
 func (s *Server) getSchema(w http.ResponseWriter, r *http.Request) {
 	var schema = []SchemaItem{}
 
-	rows, err := s.db.Query("select table_name, column_name, data_type from information_schema.columns where table_schema='public';")
+	rows, err := s.dbData.Query("select table_name, column_name, data_type from information_schema.columns where table_schema='public';")
 	if err != nil {
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return

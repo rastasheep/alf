@@ -13,13 +13,15 @@ import (
 )
 
 var (
-	dbConnection = flag.String("db-connection", "", "Connection to read only database")
-	env          = flag.String("env", "development", "Application environment")
+	dbDataConnection  = flag.String("db-data-connection", "", "Connection to read only database")
+	dbStoreConnection = flag.String("db-store-connection", "", "Connection to database for alf data")
+	env               = flag.String("env", "development", "Application environment")
 )
 
 type Server struct {
-	db     *sqlx.DB
-	logger *log.Logger
+	dbData  *sqlx.DB
+	dbStore *sqlx.DB
+	logger  *log.Logger
 }
 
 type Adapter func(http.Handler) http.Handler
@@ -31,7 +33,7 @@ func Adapt(h http.Handler, adapters ...Adapter) http.Handler {
 	return h
 }
 
-func NewDB(config string) *sqlx.DB {
+func NewDbConnection(config string) *sqlx.DB {
 	log.Printf("Connecting to postgres: %s", config)
 	db, _ := sqlx.Open("postgres", config)
 
@@ -47,11 +49,15 @@ func main() {
 	flag.Parse()
 	logger := log.New(os.Stdout, "[request] ", 0)
 
-	db := NewDB(*dbConnection)
-	defer db.Close()
+	dbData := NewDbConnection(*dbDataConnection)
+	dbStore := NewDbConnection(*dbStoreConnection)
+	defer func() {
+		dbData.Close()
+		dbStore.Close()
+	}()
 
 	respOptions := RespondOptions()
-	server := Server{db, logger}
+	server := Server{dbData, dbStore, logger}
 	router := mux.NewRouter()
 
 	router.Handle("/schema", Adapt(

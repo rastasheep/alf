@@ -35,7 +35,7 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 
 	s.logger.Printf("Executing query: %v", e.Query)
 
-	tx, err := s.db.BeginTxx(context.Background(), &sql.TxOptions{
+	tx, err := s.dbData.BeginTxx(context.Background(), &sql.TxOptions{
 		ReadOnly:  false,
 		Isolation: sql.LevelDefault,
 	})

@@ -9,4 +9,4 @@ cd "$(dirname "$0")/.."
 go-wrapper download
 go-wrapper install
 
-go-wrapper run --db-connection=$DB_CONNECTION --env=$APP_ENV
+go-wrapper run --db-data-connection=$DB_DATA_CONNECTION --db-store-connection=$DB_STORE_CONNECTION --env=$APP_ENV
