@@ -10,6 +10,8 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+
+	"github.com/rastasheep/alf/migrations"
 )
 
 var (
@@ -55,6 +57,11 @@ func main() {
 		dbData.Close()
 		dbStore.Close()
 	}()
+
+	logger.Println("Migrating database")
+	if err := migrations.Exec(dbStore); err != nil {
+		log.Fatal(err)
+	}
 
 	respOptions := RespondOptions()
 	server := Server{dbData, dbStore, logger}
