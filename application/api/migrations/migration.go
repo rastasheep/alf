@@ -15,10 +15,10 @@ var migrations = []*Migration{
 		Version: 1,
 		Scripts: []string{
 			`create table executions (
-				id      TEXT PRIMARY KEY,
-				query   TEXT NOT NULL,
+				id      serial primary key,
+				query   text not null,
 
-				created_at TIMESTAMP NOT NULL DEFAULT current_timestamp
+				created_at timestamp not null default current_timestamp
 			)`,
 		},
 	},

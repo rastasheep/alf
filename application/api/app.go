@@ -18,12 +18,15 @@ var (
 	dbDataConnection  = flag.String("db-data-connection", "", "Connection to read only database")
 	dbStoreConnection = flag.String("db-store-connection", "", "Connection to database for alf data")
 	env               = flag.String("env", "development", "Application environment")
+
+	maxSerial = 2147483647
 )
 
 type Server struct {
 	dbData  *sqlx.DB
 	dbStore *sqlx.DB
 	logger  *log.Logger
+	perPage int
 }
 
 type Adapter func(http.Handler) http.Handler
@@ -64,7 +67,12 @@ func main() {
 	}
 
 	respOptions := RespondOptions()
-	server := Server{dbData, dbStore, logger}
+	server := Server{
+		dbData:  dbData,
+		dbStore: dbStore,
+		logger:  logger,
+		perPage: 20,
+	}
 	router := mux.NewRouter()
 
 	router.Handle("/schema", Adapt(
@@ -81,6 +89,16 @@ func main() {
 		http.HandlerFunc(server.createExecution),
 		JSONResponse(respOptions),
 	)).Methods("POST")
+
+	router.Handle("/executions/{id:[0-9]+}", Adapt(
+		http.HandlerFunc(server.getExecution),
+		JSONResponse(respOptions),
+	)).Methods("GET")
+
+	router.Handle("/executions/{id:[0-9]+}", Adapt(
+		http.HandlerFunc(server.deleteExecution),
+		JSONResponse(respOptions),
+	)).Methods("DELETE")
 
 	logger.Printf("Running api server in %s mode\n", *env)
 
