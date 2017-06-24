@@ -97,6 +97,8 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	go s.resultsCache.GetResults(strconv.Itoa(e.ID), nil)
+
 	respond.With(w, r, http.StatusCreated, e)
 
 	//	s.logger.Printf("Executing query: %v", e.Query)
