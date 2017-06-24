@@ -68,7 +68,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	respOptions := RespondOptions()
 	server := Server{
 		dbData:  dbData,
 		dbStore: dbStore,
@@ -78,35 +77,14 @@ func main() {
 	server.initCache(*cacheSize * 100000)
 	router := mux.NewRouter()
 
-	router.Handle("/schema", Adapt(
-		http.HandlerFunc(server.getSchema),
-		JSONResponse(respOptions),
-	)).Methods("GET")
+	router.Handle("/schema", http.HandlerFunc(server.getSchema)).Methods("GET")
 
-	router.Handle("/executions", Adapt(
-		http.HandlerFunc(server.listExecutions),
-		JSONResponse(respOptions),
-	)).Methods("GET")
+	router.Handle("/executions", http.HandlerFunc(server.listExecutions)).Methods("GET")
+	router.Handle("/executions", http.HandlerFunc(server.createExecution)).Methods("POST")
+	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.getExecution)).Methods("GET")
+	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.deleteExecution)).Methods("DELETE")
 
-	router.Handle("/executions", Adapt(
-		http.HandlerFunc(server.createExecution),
-		JSONResponse(respOptions),
-	)).Methods("POST")
-
-	router.Handle("/executions/{id:[0-9]+}", Adapt(
-		http.HandlerFunc(server.getExecution),
-		JSONResponse(respOptions),
-	)).Methods("GET")
-
-	router.Handle("/executions/{id:[0-9]+}", Adapt(
-		http.HandlerFunc(server.deleteExecution),
-		JSONResponse(respOptions),
-	)).Methods("DELETE")
-
-	router.Handle("/results", Adapt(
-		http.HandlerFunc(server.listResults),
-		JSONResponse(respOptions),
-	)).Methods("GET")
+	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
 
 	logger.Printf("Running api server in %s mode\n", *env)
 

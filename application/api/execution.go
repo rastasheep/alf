@@ -5,11 +5,12 @@ import (
 	"errors"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
-	"gopkg.in/matryer/respond.v1"
 	"net/http"
 	"regexp"
 	"strconv"
 	"time"
+
+	"github.com/rastasheep/alf/respond"
 )
 
 type Execution struct {
@@ -75,7 +76,7 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 	var e Execution
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&e); err != nil {
-		respond.With(w, r, http.StatusBadRequest, "Invalid request payload")
+		respond.With(w, r, http.StatusBadRequest, errors.New("Invalid request payload"))
 		return
 	}
 	defer r.Body.Close()
@@ -84,7 +85,7 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 	matched := re.MatchString(e.Query)
 	if matched {
 		s.logger.Printf("Blocked execution of query: %v", e.Query)
-		respond.With(w, r, http.StatusBadRequest, "pq: you are not allowed to change the characteristics of the current transaction")
+		respond.With(w, r, http.StatusBadRequest, errors.New("pq: you are not allowed to change the characteristics of the current transaction"))
 		return
 	}
 
@@ -100,46 +101,6 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 	go s.resultsCache.GetResults(strconv.Itoa(e.ID), nil)
 
 	respond.With(w, r, http.StatusCreated, e)
-
-	//	s.logger.Printf("Executing query: %v", e.Query)
-	//
-	//	tx, err := s.dbData.BeginTxx(context.Background(), &sql.TxOptions{
-	//		ReadOnly:  false,
-	//		Isolation: sql.LevelDefault,
-	//	})
-	//	if err != nil {
-	//		respond.With(w, r, http.StatusInternalServerError, err)
-	//		return
-	//	}
-	//
-	//	_, err = tx.Exec("SET TRANSACTION READ ONLY;")
-	//	if err != nil {
-	//		respond.With(w, r, http.StatusInternalServerError, err)
-	//		return
-	//	}
-	//
-	//	rows, err := tx.Queryx(e.Query)
-	//
-	//	if err != nil {
-	//		respond.With(w, r, http.StatusInternalServerError, err)
-	//		return
-	//	}
-	//
-	//	data := make([]map[string]interface{}, 0)
-	//
-	//	defer rows.Close()
-	//	for rows.Next() {
-	//		entry := make(map[string]interface{})
-	//
-	//		err := rows.MapScan(entry)
-	//		if err != nil {
-	//			respond.With(w, r, http.StatusInternalServerError, err)
-	//			return
-	//		}
-	//
-	//		data = append(data, entry)
-	//	}
-	//	tx.Commit()
 }
 
 func (s *Server) getExecution(w http.ResponseWriter, r *http.Request) {

@@ -1,8 +1,9 @@
 package main
 
 import (
-	"gopkg.in/matryer/respond.v1"
 	"net/http"
+
+	"github.com/rastasheep/alf/respond"
 )
 
 type SchemaItem struct {
