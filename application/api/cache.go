@@ -41,7 +41,7 @@ func (g resultsGetter) Get(ctx groupcache.Context, key string, dest groupcache.S
 		return err
 	}
 
-	g.s.logger.Printf("Executing query: %v", e.Query)
+	g.s.logger.Printf("getting results for execution %d query: %s", e.ID, e.Query)
 
 	tx, err := g.s.dbData.BeginTxx(context.Background(), &sql.TxOptions{
 		ReadOnly:  false,

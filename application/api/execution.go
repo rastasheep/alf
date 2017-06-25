@@ -74,9 +74,10 @@ func (db ExecutionStore) ListExecutions(perPage int, lastId int) ([]Execution, e
 
 func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 	var e Execution
+	logPrefix := r.Context().Value("logPrefix").(string)
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&e); err != nil {
-		respond.With(w, r, http.StatusBadRequest, errors.New("Invalid request payload"))
+		respond.With(w, r, http.StatusBadRequest, errors.New("invalid request payload"))
 		return
 	}
 	defer r.Body.Close()
@@ -84,8 +85,8 @@ func (s *Server) createExecution(w http.ResponseWriter, r *http.Request) {
 	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
 	matched := re.MatchString(e.Query)
 	if matched {
-		s.logger.Printf("Blocked execution of query: %v", e.Query)
-		respond.With(w, r, http.StatusBadRequest, errors.New("pq: you are not allowed to change the characteristics of the current transaction"))
+		s.logger.Printf("%s blocked execution of query: %s", logPrefix, e.Query)
+		respond.With(w, r, http.StatusBadRequest, errors.New("you are not allowed to change the characteristics of transaction"))
 		return
 	}
 

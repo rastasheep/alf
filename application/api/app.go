@@ -54,7 +54,7 @@ func NewDbConnection(config string) *sqlx.DB {
 
 func main() {
 	flag.Parse()
-	logger := log.New(os.Stdout, "[request] ", 0)
+	logger := log.New(os.Stdout, "", 0)
 
 	dbData := NewDbConnection(*dbDataConnection)
 	dbStore := NewDbConnection(*dbStoreConnection)
@@ -63,7 +63,7 @@ func main() {
 		dbStore.Close()
 	}()
 
-	logger.Println("Migrating database")
+	logger.Println("migrating database")
 	if err := migrations.Exec(dbStore); err != nil {
 		log.Fatal(err)
 	}
@@ -86,7 +86,7 @@ func main() {
 
 	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
 
-	logger.Printf("Running api server in %s mode\n", *env)
+	logger.Printf("running server in %s mode\n", *env)
 
 	log.Fatal(http.ListenAndServe(":3000", Adapt(router, Logger(logger))))
 }
