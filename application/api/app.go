@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +11,7 @@ import (
 	_ "github.com/lib/pq"
 
 	"github.com/rastasheep/alf/migrations"
+	"github.com/rastasheep/alf/schema"
 )
 
 var (
@@ -68,25 +68,29 @@ func main() {
 		log.Fatal(err)
 	}
 
-	server := Server{
+	s := Server{
 		dbData:  dbData,
 		dbStore: dbStore,
 		logger:  logger,
 		perPage: 20,
 	}
-	server.initCache(*cacheSize * 100000)
-	router := mux.NewRouter()
+	s.initCache(*cacheSize * 100000)
+	r := http.NewServeMux()
 
-	router.Handle("/schema", http.HandlerFunc(server.getSchema)).Methods("GET")
+	schemaHandler := schema.NewSchemaHandler(s.logger, s.dbData)
+	r.Handle("/schema", http.StripPrefix("/schema", schemaHandler))
+	r.Handle("/schema/", http.StripPrefix("/schema", schemaHandler))
 
-	router.Handle("/executions", http.HandlerFunc(server.listExecutions)).Methods("GET")
-	router.Handle("/executions", http.HandlerFunc(server.createExecution)).Methods("POST")
-	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.getExecution)).Methods("GET")
-	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.deleteExecution)).Methods("DELETE")
+	//	router.Handle("/executions", http.HandlerFunc(server.listExecutions)).Methods("GET")
+	//	router.Handle("/executions", http.HandlerFunc(server.createExecution)).Methods("POST")
+	//	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.getExecution)).Methods("GET")
+	//	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.deleteExecution)).Methods("DELETE")
 
-	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
+	//	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
 
 	logger.Printf("running server in %s mode\n", *env)
 
-	log.Fatal(http.ListenAndServe(":3000", Adapt(router, Logger(logger))))
+	http.Handle("/", Adapt(r, Logger(logger)))
+
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }
