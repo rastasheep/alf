@@ -12,6 +12,7 @@ import (
 
 	"github.com/rastasheep/alf/execution"
 	"github.com/rastasheep/alf/migrations"
+	"github.com/rastasheep/alf/results"
 	"github.com/rastasheep/alf/schema"
 )
 
@@ -25,11 +26,10 @@ var (
 )
 
 type Server struct {
-	dbData       *sqlx.DB
-	dbStore      *sqlx.DB
-	logger       *log.Logger
-	resultsCache *ResultsCache
-	perPage      int
+	dbData  *sqlx.DB
+	dbStore *sqlx.DB
+	logger  *log.Logger
+	perPage int
 }
 
 type Adapter func(http.Handler) http.Handler
@@ -75,18 +75,33 @@ func main() {
 		logger:  logger,
 		perPage: 20,
 	}
-	s.initCache(*cacheSize * 100000)
 	r := http.NewServeMux()
 
 	schemaHandler := schema.NewSchemaHandler(s.logger, s.dbData)
 	r.Handle("/schema", http.StripPrefix("/schema", schemaHandler))
 	r.Handle("/schema/", http.StripPrefix("/schema", schemaHandler))
 
-	executionHandler := execution.NewExecutionHandler(s.logger, s.dbStore, s.perPage)
+	executionStore := &execution.ExecutionStore{
+		DbStore: s.dbStore,
+		DbData:  s.dbData,
+	}
+	resultCache := results.NewResultCache(logger, *cacheSize*100000, executionStore.Execute)
+
+	executionHandler := &execution.ExecutionHandler{
+		Store:       executionStore,
+		ResultCache: resultCache,
+		Logger:      s.logger,
+		PerPage:     s.perPage,
+	}
 	r.Handle("/executions", http.StripPrefix("/executions", executionHandler))
 	r.Handle("/executions/", http.StripPrefix("/executions", executionHandler))
 
-	//	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
+	resultHandler := &results.ResultHandler{
+		Logger:      logger,
+		ResultCache: resultCache,
+	}
+	r.Handle("/results", http.StripPrefix("/results", resultHandler))
+	r.Handle("/results/", http.StripPrefix("/results", resultHandler))
 
 	logger.Printf("running server in %s mode\n", *env)
 

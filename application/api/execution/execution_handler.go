@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/rastasheep/alf/respond"
+	"github.com/rastasheep/alf/results"
 )
 
 const (
@@ -19,17 +19,10 @@ const (
 )
 
 type ExecutionHandler struct {
-	logger  *log.Logger
-	store   *ExecutionStore
-	perPage int
-}
-
-func NewExecutionHandler(logger *log.Logger, db *sqlx.DB, perPage int) *ExecutionHandler {
-	return &ExecutionHandler{
-		logger:  logger,
-		store:   &ExecutionStore{db},
-		perPage: perPage,
-	}
+	Store       *ExecutionStore
+	ResultCache *results.ResultCache
+	Logger      *log.Logger
+	PerPage     int
 }
 
 func (h *ExecutionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -65,7 +58,7 @@ func (h *ExecutionHandler) listExecutions(w http.ResponseWriter, r *http.Request
 		lastId = maxSerial
 	}
 
-	executions, err := h.store.ListExecutions(h.perPage, lastId)
+	executions, err := h.Store.ListExecutions(h.PerPage, lastId)
 	if err != nil {
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return
@@ -89,18 +82,18 @@ func (h *ExecutionHandler) createExecution(w http.ResponseWriter, r *http.Reques
 	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
 	matched := re.MatchString(e.Query)
 	if matched {
-		h.logger.Printf("%s blocked execution of query: %s", logPrefix, e.Query)
+		h.Logger.Printf("%s blocked execution of query: %s", logPrefix, e.Query)
 		respond.With(w, r, http.StatusBadRequest, errors.New("you are not allowed to change the characteristics of transaction"))
 		return
 	}
 
-	e, err := h.store.CreateExecution(e)
+	e, err := h.Store.CreateExecution(e)
 	if err != nil {
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return
 	}
 
-	// go s.resultsCache.GetResults(strconv.Itoa(e.ID), nil)
+	go h.ResultCache.GetResults(strconv.Itoa(e.ID), nil)
 
 	respond.With(w, r, http.StatusCreated, e)
 }
@@ -109,7 +102,7 @@ func (h *ExecutionHandler) getExecution(w http.ResponseWriter, r *http.Request) 
 	id := r.Context().Value("executionId").(int)
 	e := Execution{ID: id}
 
-	e, err := h.store.GetExecution(e)
+	e, err := h.Store.GetExecution(e)
 	if err != nil {
 		respond.With(w, r, http.StatusNotFound, errors.New("execution not found"))
 		return
@@ -122,7 +115,7 @@ func (h *ExecutionHandler) deleteExecution(w http.ResponseWriter, r *http.Reques
 	id := r.Context().Value("executionId").(int)
 	e := Execution{ID: id}
 
-	if err := h.store.DeleteExecution(e); err != nil {
+	if err := h.Store.DeleteExecution(e); err != nil {
 		respond.With(w, r, http.StatusNotFound, errors.New("execution not found"))
 		return
 	}
