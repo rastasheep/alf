@@ -10,6 +10,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 
+	"github.com/rastasheep/alf/execution"
 	"github.com/rastasheep/alf/migrations"
 	"github.com/rastasheep/alf/schema"
 )
@@ -81,10 +82,9 @@ func main() {
 	r.Handle("/schema", http.StripPrefix("/schema", schemaHandler))
 	r.Handle("/schema/", http.StripPrefix("/schema", schemaHandler))
 
-	//	router.Handle("/executions", http.HandlerFunc(server.listExecutions)).Methods("GET")
-	//	router.Handle("/executions", http.HandlerFunc(server.createExecution)).Methods("POST")
-	//	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.getExecution)).Methods("GET")
-	//	router.Handle("/executions/{id:[0-9]+}", http.HandlerFunc(server.deleteExecution)).Methods("DELETE")
+	executionHandler := execution.NewExecutionHandler(s.logger, s.dbStore, s.perPage)
+	r.Handle("/executions", http.StripPrefix("/executions", executionHandler))
+	r.Handle("/executions/", http.StripPrefix("/executions", executionHandler))
 
 	//	router.Handle("/results", http.HandlerFunc(server.listResults)).Methods("GET")
 
