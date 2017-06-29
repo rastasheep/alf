@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -34,10 +37,16 @@ func Logger(logger *log.Logger) Adapter {
 			}
 			rw := httpResponseWriter{w, status}
 
-			logger.Printf("Started %s %s for %s", r.Method, r.URL.Path, addr)
-			defer logger.Printf("Completed %v %s in %v\n", rw.status, http.StatusText(rw.status), time.Since(start))
+			id := strconv.Itoa(rand.Int())
+			logPrefix := "[" + id + "]"
+			ctx := context.WithValue(r.Context(), "logPrefix", logPrefix)
 
-			h.ServeHTTP(rw, r)
+			rw.Header().Set("X-Request-ID", id)
+
+			logger.Printf("%s started %s %s for %s", logPrefix, r.Method, r.URL.Path, addr)
+			defer logger.Printf("%s completed %v %s in %v\n", logPrefix, rw.status, http.StatusText(rw.status), time.Since(start))
+
+			h.ServeHTTP(rw, r.WithContext(ctx))
 		})
 	}
 }
