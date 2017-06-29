@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/rastasheep/alf/execution"
+	"github.com/rastasheep/alf/executions"
 	"github.com/rastasheep/alf/results"
 	"github.com/rastasheep/alf/schema"
 )
@@ -25,7 +25,7 @@ func NewServer(logger *log.Logger, dbDataCon, dbStoreCon string, cacheSize, page
 	s.dbData = newDbConnection(dbDataCon)
 	s.dbStore = newDbConnection(dbStoreCon)
 
-	executionStore := &execution.ExecutionStore{
+	executionStore := &executions.ExecutionStore{
 		DbStore: s.dbStore,
 		DbData:  s.dbData,
 	}
@@ -33,7 +33,7 @@ func NewServer(logger *log.Logger, dbDataCon, dbStoreCon string, cacheSize, page
 
 	s.router = http.NewServeMux()
 
-	s.executionHandler = &execution.ExecutionHandler{
+	s.executionHandler = &executions.ExecutionHandler{
 		Store:       executionStore,
 		ResultCache: resultCache,
 		Logger:      logger,
