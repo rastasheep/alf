@@ -22,7 +22,7 @@ type ExecutionHandler struct {
 	Store       *ExecutionStore
 	ResultCache *results.ResultCache
 	Logger      *log.Logger
-	PerPage     int
+	PageSize    int
 }
 
 func (h *ExecutionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -58,7 +58,7 @@ func (h *ExecutionHandler) listExecutions(w http.ResponseWriter, r *http.Request
 		lastId = maxSerial
 	}
 
-	executions, err := h.Store.ListExecutions(h.PerPage, lastId)
+	executions, err := h.Store.ListExecutions(h.PageSize, lastId)
 	if err != nil {
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return
