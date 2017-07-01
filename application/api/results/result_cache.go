@@ -30,7 +30,7 @@ func NewResultCache(logger *log.Logger, size int64, getterFunc resultGetterFunc)
 	return &ResultCache{cache}
 }
 
-func (cache ResultCache) GetResults(key string, data interface{}) error {
+func (cache *ResultCache) GetResults(key string, data interface{}) error {
 	var res []byte
 	if err := cache.Get(nil, key, groupcache.AllocatingByteSliceSink(&res)); err != nil {
 		return err

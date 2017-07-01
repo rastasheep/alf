@@ -19,7 +19,7 @@ type resultGetter struct {
 	getterFunc resultGetterFunc
 }
 
-func (g resultGetter) Get(ctx groupcache.Context, key string, dest groupcache.Sink) error {
+func (g *resultGetter) Get(ctx groupcache.Context, key string, dest groupcache.Sink) error {
 	id, err := strconv.Atoi(key)
 	if err != nil {
 		return fmt.Errorf("failed to parse result cache key: %v", err)

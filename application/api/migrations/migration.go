@@ -49,31 +49,31 @@ func createVersionTable(db *sqlx.DB) error {
 	end; $$;`)
 
 	if err != nil {
-		return fmt.Errorf("Failed to create Version table: %v", err)
+		return fmt.Errorf("failed to create Version table: %v", err)
 	}
 	return nil
 }
 
-func applyMigration(db *sqlx.DB, migration *Migration) error {
+func (m *Migration) Exec(db *sqlx.DB) error {
 	tx, err := db.Begin()
 	if err != nil {
 		return err
 	}
 	defer tx.Rollback()
 
-	for i, q := range migration.Scripts {
+	for i, q := range m.Scripts {
 		if _, err := tx.Exec(q); err != nil {
-			return fmt.Errorf("Migration to version %d failed at step %d: %v", migration.Version, i+1, err)
+			return fmt.Errorf("migration to version %d failed at step %d: %v", m.Version, i+1, err)
 		}
 	}
 
-	_, err = tx.Exec(`insert into versions (version) values ($1)`, migration.Version)
+	_, err = tx.Exec(`insert into versions (version) values ($1)`, m.Version)
 	if err != nil {
-		return fmt.Errorf("Version update failed: %v", err)
+		return fmt.Errorf("version update failed: %v", err)
 	}
 
 	if err := tx.Commit(); err != nil {
-		return fmt.Errorf("Migration to version %d failed: %v", migration.Version, err)
+		return fmt.Errorf("migration to version %d failed: %v", m.Version, err)
 	}
 
 	return nil
@@ -89,13 +89,12 @@ func Exec(db *sqlx.DB) error {
 		return err
 	}
 
-	for _, migration := range migrations {
-		if migration.Version > version {
-			err := applyMigration(db, migration)
-			if err != nil {
+	for _, m := range migrations {
+		if m.Version > version {
+			if err := m.Exec(db); err != nil {
 				return err
 			}
-			version = migration.Version
+			version = m.Version
 		}
 	}
 	return nil

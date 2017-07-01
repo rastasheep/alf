@@ -3,10 +3,9 @@ package executions
 import (
 	"context"
 	"encoding/json"
-	"errors"
+	"fmt"
 	"log"
 	"net/http"
-	"regexp"
 	"strconv"
 	"strings"
 
@@ -45,7 +44,7 @@ func (h *ExecutionHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		handler = h.deleteExecution
 
 	default:
-		respond.With(w, r, http.StatusNotFound, errors.New("not found"))
+		respond.With(w, r, http.StatusNotFound, fmt.Errorf("not found"))
 		return
 	}
 
@@ -67,23 +66,33 @@ func (h *ExecutionHandler) listExecutions(w http.ResponseWriter, r *http.Request
 	respond.With(w, r, http.StatusOK, executions)
 }
 
+func (h *ExecutionHandler) getExecution(w http.ResponseWriter, r *http.Request) {
+	id := r.Context().Value("executionId").(int)
+
+	e, err := h.Store.GetExecution(id)
+	if err != nil {
+		respond.With(w, r, http.StatusNotFound, fmt.Errorf("execution not found"))
+		return
+	}
+
+	respond.With(w, r, http.StatusOK, e)
+}
+
 func (h *ExecutionHandler) createExecution(w http.ResponseWriter, r *http.Request) {
-	var e Execution
+	e := &Execution{}
 	logPrefix := r.Context().Value("logPrefix").(string)
 
 	decoder := json.NewDecoder(r.Body)
 	defer r.Body.Close()
 
-	if err := decoder.Decode(&e); err != nil {
-		respond.With(w, r, http.StatusBadRequest, errors.New("invalid request payload"))
+	if err := decoder.Decode(e); err != nil {
+		respond.With(w, r, http.StatusBadRequest, fmt.Errorf("invalid request payload"))
 		return
 	}
 
-	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
-	matched := re.MatchString(e.Query)
-	if matched {
-		h.Logger.Printf("%s blocked execution of query: %s", logPrefix, e.Query)
-		respond.With(w, r, http.StatusBadRequest, errors.New("you are not allowed to change the characteristics of transaction"))
+	if err := e.Valid(); err != nil {
+		h.Logger.Printf("%s blocked creation of execution: %s", logPrefix, err)
+		respond.With(w, r, http.StatusBadRequest, fmt.Errorf("invalid request payload: %v", err))
 		return
 	}
 
@@ -98,24 +107,11 @@ func (h *ExecutionHandler) createExecution(w http.ResponseWriter, r *http.Reques
 	respond.With(w, r, http.StatusCreated, e)
 }
 
-func (h *ExecutionHandler) getExecution(w http.ResponseWriter, r *http.Request) {
-	id := r.Context().Value("executionId").(int)
-
-	e, err := h.Store.GetExecution(id)
-	if err != nil {
-		respond.With(w, r, http.StatusNotFound, errors.New("execution not found"))
-		return
-	}
-
-	respond.With(w, r, http.StatusOK, e)
-}
-
 func (h *ExecutionHandler) deleteExecution(w http.ResponseWriter, r *http.Request) {
 	id := r.Context().Value("executionId").(int)
-	e := Execution{ID: id}
 
-	if err := h.Store.DeleteExecution(e); err != nil {
-		respond.With(w, r, http.StatusNotFound, errors.New("execution not found"))
+	if err := h.Store.DeleteExecution(id); err != nil {
+		respond.With(w, r, http.StatusNotFound, fmt.Errorf("execution not found"))
 		return
 	}
 
