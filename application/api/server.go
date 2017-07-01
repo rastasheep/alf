@@ -40,7 +40,10 @@ func NewServer(logger *log.Logger, dbDataCon, dbStoreCon string, cacheSize, page
 		PageSize:    int(pageSize),
 	}
 
-	s.schemaHandler = schema.NewSchemaHandler(logger, s.dbData)
+	s.schemaHandler = &schema.SchemaHandler{
+		Logger: logger,
+		Store:  &schema.SchemaStore{s.dbData},
+	}
 	s.resultHandler = &results.ResultHandler{
 		Logger:      logger,
 		ResultCache: resultCache,

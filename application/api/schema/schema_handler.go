@@ -5,20 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/rastasheep/alf/respond"
 )
 
 type SchemaHandler struct {
-	logger *log.Logger
-	store  *SchemaStore
-}
-
-func NewSchemaHandler(logger *log.Logger, db *sqlx.DB) *SchemaHandler {
-	return &SchemaHandler{
-		logger: logger,
-		store:  &SchemaStore{db},
-	}
+	Logger *log.Logger
+	Store  *SchemaStore
 }
 
 func (h *SchemaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +19,7 @@ func (h *SchemaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	schema, err := h.store.GetSchema()
+	schema, err := h.Store.GetSchema()
 	if err != nil {
 		respond.With(w, r, http.StatusInternalServerError, err)
 		return
