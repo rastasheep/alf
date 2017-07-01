@@ -100,9 +100,8 @@ func (h *ExecutionHandler) createExecution(w http.ResponseWriter, r *http.Reques
 
 func (h *ExecutionHandler) getExecution(w http.ResponseWriter, r *http.Request) {
 	id := r.Context().Value("executionId").(int)
-	e := Execution{ID: id}
 
-	e, err := h.Store.GetExecution(e)
+	e, err := h.Store.GetExecution(id)
 	if err != nil {
 		respond.With(w, r, http.StatusNotFound, errors.New("execution not found"))
 		return
