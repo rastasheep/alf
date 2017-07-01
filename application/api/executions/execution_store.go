@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"regexp"
 	"time"
 
 	"github.com/jmoiron/sqlx"
@@ -16,30 +17,30 @@ type ExecutionStore struct {
 
 type Execution struct {
 	ID        int       `json:"id,omitempty"`
-	Query     string    `json:"query"`
+	Query     string    `json:"query,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
 
-func (store ExecutionStore) CreateExecution(e Execution) (Execution, error) {
+func (store *ExecutionStore) GetExecution(id int) (*Execution, error) {
+	var e Execution
+	err := store.DbStore.QueryRow(`select id, query, created_at from executions where id = $1`, id).Scan(&e.ID, &e.Query, &e.CreatedAt)
+
+	return &e, err
+}
+
+func (store *ExecutionStore) CreateExecution(e *Execution) (*Execution, error) {
 	err := store.DbStore.QueryRow(`insert into executions (query) values ($1) returning id, query, created_at`, e.Query).Scan(&e.ID, &e.Query, &e.CreatedAt)
 
 	return e, err
 }
 
-func (store ExecutionStore) GetExecution(id int) (Execution, error) {
-	var e Execution
-	err := store.DbStore.QueryRow(`select id, query, created_at from executions where id = $1`, id).Scan(&e.ID, &e.Query, &e.CreatedAt)
-
-	return e, err
-}
-
-func (store ExecutionStore) DeleteExecution(e Execution) error {
-	_, err := store.DbStore.Exec(`delete from executions where id = $1`, e.ID)
+func (store *ExecutionStore) DeleteExecution(id int) error {
+	_, err := store.DbStore.Exec(`delete from executions where id = $1`, id)
 
 	return err
 }
 
-func (store ExecutionStore) ListExecutions(perPage int, lastId int) ([]Execution, error) {
+func (store *ExecutionStore) ListExecutions(perPage int, lastId int) (*[]Execution, error) {
 	executions := make([]Execution, 0)
 
 	rows, err := store.DbStore.Query(`select id, query, created_at from executions where id < $1 order by id desc limit $2`, lastId, perPage)
@@ -57,10 +58,10 @@ func (store ExecutionStore) ListExecutions(perPage int, lastId int) ([]Execution
 		executions = append(executions, e)
 	}
 
-	return executions, err
+	return &executions, err
 }
 
-func (store ExecutionStore) Execute(id int) ([]map[string]interface{}, error) {
+func (store *ExecutionStore) Execute(id int) ([]map[string]interface{}, error) {
 	e, err := store.GetExecution(id)
 	if err != nil {
 		return nil, fmt.Errorf("execution not found: %v", err)
@@ -101,4 +102,19 @@ func (store ExecutionStore) Execute(id int) ([]map[string]interface{}, error) {
 	tx.Commit()
 
 	return data, nil
+}
+
+func (e *Execution) Valid() error {
+	re := regexp.MustCompile("(?i)(SET.*TRANSACTION)|(SET.*SESSION.*CHARACTERISTICS)")
+
+	matched := re.MatchString(e.Query)
+	if matched {
+		return fmt.Errorf("changeng characteristics of transaction is not allowed")
+	}
+
+	if e.Query == "" {
+		return fmt.Errorf("query is required")
+	}
+
+	return nil
 }
