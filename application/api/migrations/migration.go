@@ -22,6 +22,18 @@ var migrations = []*Migration{
 			)`,
 		},
 	},
+	{
+		Version: 2,
+		Scripts: []string{
+			`create table templates (
+				id      serial primary key,
+				query   text not null,
+
+				updated_at timestamp not null default current_timestamp,
+				created_at timestamp not null default current_timestamp
+			)`,
+		},
+	},
 }
 
 func createVersionTable(db *sqlx.DB) error {

@@ -48,6 +48,7 @@ func main() {
 	s.Handle("/schema", s.schemaHandler)
 	s.Handle("/executions", s.executionHandler)
 	s.Handle("/results", s.resultHandler)
+	s.Handle("/templates", s.templateHandler)
 
 	logger.Printf("running server in %s mode on port %s", *env, *port)
 
