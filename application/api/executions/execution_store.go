@@ -26,8 +26,9 @@ func (store ExecutionStore) CreateExecution(e Execution) (Execution, error) {
 	return e, err
 }
 
-func (store ExecutionStore) GetExecution(e Execution) (Execution, error) {
-	err := store.DbStore.QueryRow(`select id, query, created_at from executions where id = $1`, e.ID).Scan(&e.ID, &e.Query, &e.CreatedAt)
+func (store ExecutionStore) GetExecution(id int) (Execution, error) {
+	var e Execution
+	err := store.DbStore.QueryRow(`select id, query, created_at from executions where id = $1`, id).Scan(&e.ID, &e.Query, &e.CreatedAt)
 
 	return e, err
 }
@@ -60,8 +61,7 @@ func (store ExecutionStore) ListExecutions(perPage int, lastId int) ([]Execution
 }
 
 func (store ExecutionStore) Execute(id int) ([]map[string]interface{}, error) {
-	e := Execution{ID: id}
-	e, err := store.GetExecution(e)
+	e, err := store.GetExecution(id)
 	if err != nil {
 		return nil, fmt.Errorf("execution not found: %v", err)
 	}

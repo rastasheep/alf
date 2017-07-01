@@ -9,6 +9,7 @@ import (
 	"github.com/rastasheep/alf/executions"
 	"github.com/rastasheep/alf/results"
 	"github.com/rastasheep/alf/schema"
+	"github.com/rastasheep/alf/templates"
 )
 
 type Server struct {
@@ -18,6 +19,7 @@ type Server struct {
 	executionHandler http.Handler
 	schemaHandler    http.Handler
 	resultHandler    http.Handler
+	templateHandler  http.Handler
 }
 
 func NewServer(logger *log.Logger, dbDataCon, dbStoreCon string, cacheSize, pageSize int64) *Server {
@@ -40,10 +42,17 @@ func NewServer(logger *log.Logger, dbDataCon, dbStoreCon string, cacheSize, page
 		PageSize:    int(pageSize),
 	}
 
-	s.schemaHandler = schema.NewSchemaHandler(logger, s.dbData)
+	s.schemaHandler = &schema.SchemaHandler{
+		Logger: logger,
+		Store:  &schema.SchemaStore{s.dbData},
+	}
 	s.resultHandler = &results.ResultHandler{
 		Logger:      logger,
 		ResultCache: resultCache,
+	}
+	s.templateHandler = &templates.TemplateHandler{
+		Logger: logger,
+		Store:  &templates.TemplateStore{s.dbStore},
 	}
 
 	return s
