@@ -15,7 +15,7 @@ type SchemaItem struct {
 	DataType   string `json:"data_type"`
 }
 
-func (store *SchemaStore) GetSchema() ([]SchemaItem, error) {
+func (store *SchemaStore) GetSchema() (*[]SchemaItem, error) {
 	var schema = []SchemaItem{}
 
 	rows, err := store.Query("select table_name, column_name, data_type from information_schema.columns where table_schema='public';")
@@ -35,5 +35,5 @@ func (store *SchemaStore) GetSchema() ([]SchemaItem, error) {
 		schema = append(schema, item)
 	}
 
-	return schema, nil
+	return &schema, nil
 }
