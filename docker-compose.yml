@@ -2,15 +2,27 @@ version: "2"
 services:
   api:
     image: golang:1.8
-    working_dir: ${GOLANG_DESTINATION_PATH}
+    working_dir: ${API_DESTINATION_PATH}
     volumes:
-      - ${API_APP_PATH}:${GOLANG_DESTINATION_PATH}:cached
+      - ${API_APP_PATH}:${API_DESTINATION_PATH}:cached
     depends_on:
       - postgres
     ports:
       - 3000:3000
     env_file:
       - .env.api
+    command: script/server
+
+  client:
+    build:
+      context: ${CLIENT_APP_PATH}
+    working_dir: ${CLIENT_DESTINATION_PATH}
+    volumes:
+      - ${CLIENT_APP_PATH}:${CLIENT_DESTINATION_PATH}:cached
+    ports:
+      - 4200:4200
+    env_file:
+      - .env.client
     command: script/server
 
   postgres:
