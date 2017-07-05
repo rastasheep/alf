@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>A Pen by  Aleksandar Diklic</title>
+
+  <link rel='stylesheet prefetch' href='https://unpkg.com/basscss@8.0.2/css/basscss.min.css'>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="schema-ui idle-animation">
+  <div class="search">
+    <div class="search-pill">
+      <input placeholder="Search columns" type="text"> <button class="clear"></button>
+    </div>
+  </div>
+  <div class="list">
+    <div class="inner">
+      <div class="no-results-message">
+        No column or table names matched.
+      </div>
+      <div class="section-name">
+        Database tables
+      </div>
+      <div class="table-name">
+        balance_transaction_fee_details
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        balance_transactions
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">available_on</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">fee</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">net</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">automatic_transfer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        charges
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount_refunded</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application_fee_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">captured</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">destination_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">dispute_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">failure_code</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">failure_message</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">invoice_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">order_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">paid</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receipt_email</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receipt_number</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">refunded</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">statement_descriptor</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_transfer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">transfer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">transfer_group</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">source_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_city</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_country</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_line1</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_line1_check</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_line2</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_state</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_zip</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_address_zip_check</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_brand</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_country</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">card_customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_cvc_check</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_dynamic_last4</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_exp_month</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_exp_year</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_fingerprint</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_funding</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_last4</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">card_tokenization_method</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        charges_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        disputes
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">is_charge_refundable</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">reason</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_access_activity_log</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_billing_address</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_cancellation_policy_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_cancellation_policy_disclosure</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_cancellation_rebuttal</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_customer_communication_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_customer_email_address</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_customer_name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_customer_purchase_ip</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_customer_signature_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_duplicate_charge_documentation_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_duplicate_charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_product_description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_receipt_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_refund_policy_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_refund_policy_disclosure</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_refund_refusal_explanation</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_service_date</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_service_documentation_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_shipping_address</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_shipping_carrier</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_shipping_date</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_shipping_documentation_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_shipping_tracking_number</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_uncategorized_file_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_uncategorized_text</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_details_due_by</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_details_has_evidence</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_details_past_due</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">evidence_details_submission_count</span><span class="column-type">integer</span>
+      </div>
+      <div class="table-name">
+        disputes_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">dispute_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        refunds
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">reason</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receipt_number</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        refunds_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">refund_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        transfer_reversals
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">transfer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        transfers
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount_reversed</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">application_fee_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">date</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">destination_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">destination_payment_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">failure_code</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">failure_message</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">reversed</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">statement_descriptor</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">transfer_group</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        transfers_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">transfer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="section-name">
+        Customer tables
+      </div>
+      <div class="table-name">
+        customers
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">account_balance</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">business_vat_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">delinquent</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">email</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">default_source_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_phone</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_city</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_country</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_line1</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_line2</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_postal_code</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">shipping_address_state</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_coupon_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_subscription</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        customers_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="section-name">
+        Subscription tables
+      </div>
+      <div class="table-name">
+        coupons
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount_off</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">duration</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">duration_in_months</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">max_redemptions</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">percent_off</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">redeem_by</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">times_redeemed</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">valid</span><span class="column-type">boolean</span>
+      </div>
+      <div class="table-name">
+        coupons_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">coupon_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        invoice_items
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">date</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discountable</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">invoice_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">plan_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">proration</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">quantity</span><span class="column-type">integer</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">subscription_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        invoice_items_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">invoice_item_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        invoice_line_items
+      </div>
+      <div class="column key">
+        <span class="column-name">invoice_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discountable</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">plan_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">proration</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">quantity</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">subscription</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">source_type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        invoices
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount_due</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application_fee</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">attempt_count</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">attempted</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">closed</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">date</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">description</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">ending_balance</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">forgiven</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">next_payment_attempt</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">paid</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">period_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receipt_number</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">starting_balance</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">statement_descriptor</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">subscription_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">subscription_proration_date</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">subtotal</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">tax</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">tax_percent</span><span class="column-type">double</span>
+      </div>
+      <div class="column">
+        <span class="column-name">total</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">webhooks_delivered_at</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_coupon_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_subscription</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        invoices_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">invoice_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        plans
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">interval</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">interval_count</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">statement_descriptor</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">trial_period_days</span><span class="column-type">integer</span>
+      </div>
+      <div class="table-name">
+        plans_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">plan_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        subscriptions
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application_fee_percent</span><span class="column-type">double</span>
+      </div>
+      <div class="column">
+        <span class="column-name">cancel_at_period_end</span><span class="column-type">boolean</span>
+      </div>
+      <div class="column">
+        <span class="column-name">canceled_at</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">current_period_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">current_period_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">ended_at</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">plan_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">quantity</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">tax_percent</span><span class="column-type">double</span>
+      </div>
+      <div class="column">
+        <span class="column-name">trial_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">trial_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_coupon_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">discount_customer_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_end</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_start</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">discount_subscription</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        subscriptions_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">subscription_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="section-name">
+        Other tables
+      </div>
+      <div class="table-name">
+        application_fees
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">account_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount_refunded</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">application_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">balance_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column key">
+        <span class="column-name">charge_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">originating_transaction_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">refunded</span><span class="column-type">boolean</span>
+      </div>
+      <div class="table-name">
+        sources
+      </div>
+      <div class="column key">
+        <span class="column-name">id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">amount</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">client_secret</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">created</span><span class="column-type">timestamp</span>
+      </div>
+      <div class="column">
+        <span class="column-name">currency</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">flow</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">type</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">usage</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">code_verification_attempts_remaining</span><span class="column-type">integer</span>
+      </div>
+      <div class="column">
+        <span class="column-name">code_verification_status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_email</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_phone</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_email</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_name</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_phone</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_city</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_country</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_line1</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_line2</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_postal_code</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_address_state</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_city</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_country</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_line1</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_line2</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_postal_code</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">owner_verified_address_state</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receiver_address</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receiver_amount_charged</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receiver_amount_received</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">receiver_amount_returned</span><span class="column-type">bigint</span>
+      </div>
+      <div class="column">
+        <span class="column-name">redirect_return_url</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">redirect_status</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">redirect_url</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        sources_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">source_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+      <div class="table-name">
+        transfer_reversals_metadata
+      </div>
+      <div class="column key">
+        <span class="column-name">transfer_reversal_id</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">key</span><span class="column-type">varchar</span>
+      </div>
+      <div class="column">
+        <span class="column-name">value</span><span class="column-type">varchar</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

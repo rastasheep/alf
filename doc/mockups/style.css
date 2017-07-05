@@ -1,0 +1,157 @@
+* { box-sizing: border-box; }
+body {
+  background: #fff;
+  min-height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-size: 62.5%;
+  font-family: Camphor,Open Sans,Segoe UI,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "pnum";
+  font-variant-numeric: proportional-nums;
+}
+.schema-ui {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  max-width: 400px;
+  margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  font-family: Camphor,Open Sans,Segoe UI,sans-serif;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+}
+.schema-ui .search-pill {
+  margin: 20px 20px 0;
+  background: #f6f9fc;
+  border-radius: 4px;
+  position: relative;
+}
+.schema-ui .search-pill:before {
+  content: '';
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  left: 10px;
+  top: 8px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48ZyBmaWxsPSIjODg5OEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01LjI1IDExYTUuMjUgNS4yNSAwIDEgMCAwLTEwLjUgNS4yNSA1LjI1IDAgMCAwIDAgMTAuNXptMC0uOTVhNC4zIDQuMyAwIDEgMCAwLTguNiA0LjMgNC4zIDAgMCAwIDAgOC42eiIvPjxwYXRoIGQ9Ik04LjU0MiA5LjY0NWwxLjA2MS0xLjA2MSAyLjU5NSAyLjU5NWEuNzQ4Ljc0OCAwIDAgMSAwIDEuMDYuNzQ4Ljc0OCAwIDAgMS0xLjA2IDBMOC41NDEgOS42NDV6Ii8+PC9nPjwvc3ZnPg==) no-repeat;
+  pointer-events: none;
+}
+.schema-ui .search-pill input {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 27px;
+  color: #424770;
+  width: 100%;
+  padding: 1px 28px 0;
+  border-radius: 4px;
+  transition: box-shadow .2s;
+  position: relative;
+}
+.schema-ui .search-pill input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5px rgba(50,151,211,.2), 0 0 0 2px rgba(50,151,211,.25), 0 0.5px 1px rgba(0,0,0,.08);
+}
+.schema-ui .search-pill .clear {
+  border: none;
+  outline: none;
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZD0iTTggMTZBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNnptMC02LjgxbDIuMzcgMi4zNyAxLjE5LTEuMTlMOS4xOSA4bDIuMzctMi4zNy0xLjE5LTEuMTlMOCA2LjgxIDUuNjMgNC40NCA0LjQ0IDUuNjMgNi44MSA4bC0yLjM3IDIuMzcgMS4xOSAxLjE5TDggOS4xOXoiIGZpbGw9IiM4Nzk4QUIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==)
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  display: none
+}
+
+/* list */
+
+.schema-ui .list {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.schema-ui .list .inner {
+  overflow: hidden;
+  position: relative;
+}
+
+.schema-ui .no-results-message {
+  display: none;
+  font-size: 14px;
+  color: #6b7c93;
+  top: 10px!important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+
+.schema-ui .section-name {
+  color: #8898aa;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .025em;
+  padding: 0 20px;
+}
+
+.schema-ui .table-name {
+  font: 13px/18px Source Code Pro,monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: #424770;
+  font-weight: 700;
+  margin-top: 9px;
+  padding: 0 20px;
+}
+.schema-ui .column {
+  position: relative;
+  padding-left: 40px!important;
+  color: #8898aa;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 20px;
+}
+.schema-ui .column:hover {
+  background: rgba(227,234,255,.5);
+  color: #555abf!important;
+}
+.schema-ui .column-name {
+  font: 13px/24px Source Code Pro,monospace;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+.schema-ui .column-type {
+  font-size: 12px;
+  line-height: 24px;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  text-transform: capitalize;
+}
