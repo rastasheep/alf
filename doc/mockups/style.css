@@ -18,30 +18,8 @@ body {
   font-variant-numeric: proportional-nums;
 }
 
-.nav {
-  display: flex;
-  margin: 20px 20px 0;
-  justify-content: space-around;
-}
-
-.nav .section-name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  font-weight: 700;
-  color: #8898aa;
-  font-size: 13px;
-  letter-spacing: .025em;
-  text-decoration: none;
-}
-
-.nav .section-name-active {
-  color: #424770;
-}
-
-/* schema */
-.schema-ui {
+/* sidebar */
+.sidebar {
   position: absolute;
   top: 0;
   left: 10px;
@@ -54,13 +32,36 @@ body {
   background: #fff;
   box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
 }
-.schema-ui .search-pill {
+
+.sidebar__nav {
+  display: flex;
+  margin: 20px 20px 0;
+  justify-content: space-around;
+}
+
+.sidebar__nav-section {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-weight: 700;
+  color: #8898aa;
+  font-size: 13px;
+  letter-spacing: .025em;
+  text-decoration: none;
+}
+
+.sidebar__nav-section--active {
+  color: #424770;
+}
+
+.sidebar__search {
   margin: 20px 20px 0;
   background: #f6f9fc;
   border-radius: 4px;
   position: relative;
 }
-.schema-ui .search-pill:before {
+.sidebar__search:before {
   content: '';
   position: absolute;
   width: 13px;
@@ -70,7 +71,7 @@ body {
   background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48ZyBmaWxsPSIjODg5OEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01LjI1IDExYTUuMjUgNS4yNSAwIDEgMCAwLTEwLjUgNS4yNSA1LjI1IDAgMCAwIDAgMTAuNXptMC0uOTVhNC4zIDQuMyAwIDEgMCAwLTguNiA0LjMgNC4zIDAgMCAwIDAgOC42eiIvPjxwYXRoIGQ9Ik04LjU0MiA5LjY0NWwxLjA2MS0xLjA2MSAyLjU5NSAyLjU5NWEuNzQ4Ljc0OCAwIDAgMSAwIDEuMDYuNzQ4Ljc0OCAwIDAgMS0xLjA2IDBMOC41NDEgOS42NDV6Ii8+PC9nPjwvc3ZnPg==) no-repeat;
   pointer-events: none;
 }
-.schema-ui .search-pill input {
+.sidebar__search-input {
   background: none;
   border: none;
   font-family: inherit;
@@ -83,14 +84,14 @@ body {
   transition: box-shadow .2s;
   position: relative;
 }
-.schema-ui .search-pill input:focus {
+.sidebar__search-input:focus {
   outline: none;
   box-shadow: 0 0 0 0.5px rgba(50,151,211,.2), 0 0 0 2px rgba(50,151,211,.25), 0 0.5px 1px rgba(0,0,0,.08);
 }
-.schema-ui .search-pill .clear {
+.sidebar__search-clear {
   border: none;
   outline: none;
-  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZD0iTTggMTZBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNnptMC02LjgxbDIuMzcgMi4zNyAxLjE5LTEuMTlMOS4xOSA4bDIuMzctMi4zNy0xLjE5LTEuMTlMOCA2LjgxIDUuNjMgNC40NCA0LjQ0IDUuNjMgNi44MSA4bC0yLjM3IDIuMzcgMS4xOSAxLjE5TDggOS4xOXoiIGZpbGw9IiM4Nzk4QUIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==)
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZD0iTTggMTZBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNnptMC02LjgxbDIuMzcgMi4zNyAxLjE5LTEuMTlMOS4xOSA4bDIuMzctMi4zNy0xLjE5LTEuMTlMOCA2LjgxIDUuNjMgNC40NCA0LjQ0IDUuNjMgNi44MSA4bC0yLjM3IDIuMzcgMS4xOSAxLjE5TDggOS4xOXoiIGZpbGw9IiM4Nzk4QUIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
   width: 16px;
   height: 16px;
   position: absolute;
@@ -100,9 +101,8 @@ body {
   display: none
 }
 
-/* list */
-
-.schema-ui .list {
+/* schema */
+.schema {
   position: absolute;
   top: 95px;
   left: 0;
@@ -117,12 +117,12 @@ body {
   user-select: none;
   cursor: default;
 }
-.schema-ui .list .inner {
+.schema__container {
   overflow: hidden;
   position: relative;
 }
 
-.schema-ui .no-results-message {
+.schema__empty-message {
   display: none;
   font-size: 14px;
   color: #6b7c93;
@@ -132,7 +132,7 @@ body {
   transition: opacity .2s;
 }
 
-.schema-ui .table-name {
+.schema__table-name {
   font: 13px/18px Source Code Pro,monospace;
   overflow: hidden;
   white-space: nowrap;
@@ -143,7 +143,7 @@ body {
   margin-top: 9px;
   padding: 0 20px;
 }
-.schema-ui .column {
+.schema__column {
   position: relative;
   padding-left: 40px!important;
   color: #8898aa;
@@ -151,11 +151,11 @@ body {
   display: flex;
   padding: 0 20px;
 }
-.schema-ui .column:hover {
+.schema__column:hover {
   background: rgba(227,234,255,.5);
   color: #555abf!important;
 }
-.schema-ui .column-name {
+.schema__column-name {
   font: 13px/24px Source Code Pro,monospace;
   overflow: hidden;
   white-space: nowrap;
@@ -163,7 +163,7 @@ body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
-.schema-ui .column-type {
+.schema__column-type {
   font-size: 12px;
   line-height: 24px;
   -ms-flex: 0 0 auto;
