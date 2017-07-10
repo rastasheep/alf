@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Sidebar hisotry - Alf by Aleksandar Diklic</title>
+    <link rel="stylesheet" href="sidebar-history.css">
+  </head>
+
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <symbol viewBox="0 0 512 512" id="ion-ios-trash-outline"><path d="M400 113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1 64 192 77.1 192 93.3v20h-80V128h21.1l23.6 290.7c0 16.2 13.1 29.3 29.3 29.3h141c16.2 0 29.3-13.1 29.3-29.3L379.6 128H400v-14.7zm-193.4-20c0-8.1 6.6-14.7 14.6-14.7h69.5c8.1 0 14.6 6.6 14.6 14.7v20h-98.7v-20zm135 324.6v.8c0 8.1-6.6 14.7-14.6 14.7H186c-8.1 0-14.6-6.6-14.6-14.7v-.8L147.7 128h217.2l-23.3 289.9z"></path><path d="M249 160h14v241h-14zM320 160h-14.6l-10.7 241h14.6zM206.5 160H192l10.7 241h14.6z"></path></symbol>
+        <symbol id="ion-ios-close-outline" viewBox="0 0 512 512"><style>.amgst0{fill:#010101}</style><path class="amgst0" d="M403.1 108.9c-81.2-81.2-212.9-81.2-294.2 0s-81.2 212.9 0 294.2c81.2 81.2 212.9 81.2 294.2 0s81.2-213 0-294.2zm-12.3 281.9c-74.3 74.3-195.3 74.3-269.6 0-74.3-74.3-74.3-195.3 0-269.6s195.3-74.3 269.6 0c74.4 74.3 74.4 195.3 0 269.6z"></path><path class="amgst0" d="M340.2 160l-84.4 84.2-84-83.8-11.8 11.8 84 83.8-84 83.8 11.8 11.8 84-83.8 84.4 84.2 11.8-11.8-84.4-84.2 84.4-84.2z"></path></symbol>
+      </defs>
+    </svg>
+    <div class="sidebar">
+      <div class="sidebar__nav">
+        <a href="#" class="sidebar__nav-section">
+          Schema
+        </a>
+        <a href="#" class="sidebar__nav-section sidebar__nav-section--active">
+          History
+        </a>
+        <a href="#" class="sidebar__nav-section">
+          Templates
+        </a>
+      </div>
+
+      <div class="sidebar__search">
+        <input class="sidebar__search-input" placeholder="Search history" type="text">
+        <button class="sidebar__search-clear">
+          <svg class="ion ion-ios-close-outline" width="20" height="20">
+            <use xlink:href="#ion-ios-close-outline"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="history">
+        <div class="history__container">
+          <div class="history__empty-message">
+            history is not made yet, execute some queries
+          </div>
+
+          <div class="history__period">
+            today
+          </div>
+          <div class="history__execution">
+            <div class="history__execution-title-container">
+              <span class="history__execution-title">Payment card breakdown</span>
+              <span class="history__execution-action">
+                <svg class="ion ion-ios-trash-outline" width="20" height="20">
+                  <use xlink:href="#ion-ios-trash-outline"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="history__execution-code-container">
+              <div class="history__execution-code">select name, sername</div>
+              <div class="history__execution-code">from users</div>
+              <div class="history__execution-code">left join Recruits on id = Recruits.id</div>
+              <div class="history__execution-code-badge">4 lines hidden</div>
+              <div class="history__execution-code">where status like 'active'</div>
+              <div class="history__execution-code">group by 1, 2</div>
+              <div class="history__execution-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="history__execution">
+            <div class="history__execution-title-container">
+              <span class="history__execution-title">Untitled</span>
+              <span class="history__execution-action">
+                <svg class="ion ion-ios-trash-outline" width="20" height="20">
+                  <use xlink:href="#ion-ios-trash-outline"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="history__execution-code-container">
+              <div class="history__execution-code">select name, sername</div>
+              <div class="history__execution-code">from users</div>
+              <div class="history__execution-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="history__period">
+            yesterday
+          </div>
+          <div class="history__execution">
+            <div class="history__execution-title-container">
+              <span class="history__execution-title">Untitled</span>
+              <span class="history__execution-action">
+                <svg class="ion ion-ios-trash-outline" width="20" height="20">
+                  <use xlink:href="#ion-ios-trash-outline"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="history__execution-code-container">
+              <div class="history__execution-code">select name, sername</div>
+              <div class="history__execution-code">from users</div>
+              <div class="history__execution-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="history__period">
+            7. june
+          </div>
+          <div class="history__execution">
+            <div class="history__execution-title-container">
+              <span class="history__execution-title">Untitled</span>
+              <span class="history__execution-action">
+                <svg class="ion ion-ios-trash-outline" width="20" height="20">
+                  <use xlink:href="#ion-ios-trash-outline"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="history__execution-code-container">
+              <div class="history__execution-code">select name, sername</div>
+              <div class="history__execution-code">from users</div>
+              <div class="history__execution-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="history__period history__period--last">
+            fin
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
