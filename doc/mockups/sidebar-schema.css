@@ -64,11 +64,11 @@ body {
 .sidebar__search:before {
   content: '';
   position: absolute;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   left: 10px;
-  top: 8px;
-  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48ZyBmaWxsPSIjODg5OEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01LjI1IDExYTUuMjUgNS4yNSAwIDEgMCAwLTEwLjUgNS4yNSA1LjI1IDAgMCAwIDAgMTAuNXptMC0uOTVhNC4zIDQuMyAwIDEgMCAwLTguNiA0LjMgNC4zIDAgMCAwIDAgOC42eiIvPjxwYXRoIGQ9Ik04LjU0MiA5LjY0NWwxLjA2MS0xLjA2MSAyLjU5NSAyLjU5NWEuNzQ4Ljc0OCAwIDAgMSAwIDEuMDYuNzQ4Ljc0OCAwIDAgMS0xLjA2IDBMOC41NDEgOS42NDV6Ii8+PC9nPjwvc3ZnPg==) no-repeat;
+  top: 7px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='currentcolor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><circle cx='14' cy='14' r='12'/><path d='M23 23 L30 30'/></svg>") no-repeat;
   pointer-events: none;
 }
 .sidebar__search-input {
@@ -91,14 +91,14 @@ body {
 .sidebar__search-clear {
   border: none;
   outline: none;
-  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZD0iTTggMTZBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNnptMC02LjgxbDIuMzcgMi4zNyAxLjE5LTEuMTlMOS4xOSA4bDIuMzctMi4zNy0xLjE5LTEuMTlMOCA2LjgxIDUuNjMgNC40NCA0LjQ0IDUuNjMgNi44MSA4bC0yLjM3IDIuMzcgMS4xOSAxLjE5TDggOS4xOXoiIGZpbGw9IiM4Nzk4QUIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
-  width: 16px;
-  height: 16px;
+  padding: 0;
+  background: transparent;
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 7px;
+  right: 7px;
+  height: 14px;
   cursor: pointer;
-  display: none
+  display: none;
 }
 
 /* schema */
