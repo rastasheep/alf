@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Sidebar templates - Alf by Aleksandar Diklic</title>
+    <link rel="stylesheet" href="sidebar-templates.css">
+  </head>
+
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <symbol id="i-close" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M2 30 L30 2 M30 30 L2 2" />
+        </symbol>
+        <symbol id="i-trash" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+        </symbol>
+        <symbol id="i-link" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M18 8 C18 8 24 2 27 5 30 8 29 12 24 16 19 20 16 21 14 17 M14 24 C14 24 8 30 5 27 2 24 3 20 8 16 13 12 16 11 18 15" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="sidebar">
+      <div class="sidebar__nav">
+        <a href="#" class="sidebar__nav-section">
+          Schema
+        </a>
+        <a href="#" class="sidebar__nav-section">
+          History
+        </a>
+        <a href="#" class="sidebar__nav-section sidebar__nav-section--active">
+          Templates
+        </a>
+      </div>
+
+      <div class="sidebar__search">
+        <input class="sidebar__search-input" placeholder="Search templates" type="text">
+        <button class="sidebar__search-clear">
+          <svg width="14" height="14">
+            <use xlink:href="#i-close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="templates">
+        <div class="templates__container">
+          <div class="templates__empty-message">
+            There is no saved templates yet
+          </div>
+
+          <div class="templates__query">
+            <div class="templates__query-title-container">
+              <span class="templates__query-title">Payment card breakdown</span>
+              <span class="templates__query-action">
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-link"></use>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-trash"></use>
+                  </svg>
+                </a>
+              </span>
+            </div>
+            <div class="templates__query-code-container">
+              <div class="templates__query-code">select name, sername</div>
+              <div class="templates__query-code">from users</div>
+              <div class="templates__query-code">left join Recruits on id = Recruits.id</div>
+              <div class="templates__query-code-badge">4 lines hidden</div>
+              <div class="templates__query-code">where status like 'active'</div>
+              <div class="templates__query-code">group by 1, 2</div>
+              <div class="templates__query-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="templates__query">
+            <div class="templates__query-title-container">
+              <span class="templates__query-title">User projects</span>
+              <span class="templates__query-action">
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-link"></use>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-trash"></use>
+                  </svg>
+                </a>
+              </span>
+            </div>
+            <div class="templates__query-code-container">
+              <div class="templates__query-code">select name, sername</div>
+              <div class="templates__query-code">from users</div>
+              <div class="templates__query-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="templates__query">
+            <div class="templates__query-title-container">
+              <span class="templates__query-title">Number of users</span>
+              <span class="templates__query-action">
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-link"></use>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-trash"></use>
+                  </svg>
+                </a>
+              </span>
+            </div>
+            <div class="templates__query-code-container">
+              <div class="templates__query-code">select name, sername</div>
+              <div class="templates__query-code">from users</div>
+              <div class="templates__query-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="templates__query">
+            <div class="templates__query-title-container">
+              <span class="templates__query-title">New transfers</span>
+              <span class="templates__query-action">
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-link"></use>
+                  </svg>
+                </a>
+                <a href="#">
+                  <svg width="16" height="16">
+                    <use xlink:href="#i-trash"></use>
+                  </svg>
+                </a>
+              </span>
+            </div>
+            <div class="templates__query-code-container">
+              <div class="templates__query-code">select name, sername</div>
+              <div class="templates__query-code">from users</div>
+              <div class="templates__query-code">order by created_at desc</div>
+            </div>
+          </div>
+
+          <div class="templates__end">
+            ~ fin ~
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
