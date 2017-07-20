@@ -106,7 +106,7 @@ body {
   border: none;
   outline: none;
   padding: 0;
-  background: transparent;
+  background-color: transparent;
   position: absolute;
   top: 7px;
   right: 7px;
@@ -155,7 +155,7 @@ body {
   cursor: pointer;
 }
 .templates__query:hover  {
-  background: var(--action-background--hover);
+  background-color: var(--action-background--hover);
   color: var(--action-color--hover);
 }
 .templates__query-title-container {
