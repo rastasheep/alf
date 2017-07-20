@@ -9,6 +9,7 @@
 
   --text-regular-color: var(--color__ucla-blue);
   --text-bold-color: var(--color__japanese-indigo);
+  --action-color: var(--color__blue-green);
   --action-color--hover: var(--color__blue-green);
   --action-background--hover: var(--color__blue-green--light);
 
@@ -102,7 +103,7 @@ body {
 }
 .sidebar__search-input:focus {
   outline: none;
-  box-shadow: 0 0 0 0.5px rgba(50,151,211,.2), 0 0 0 2px rgba(50,151,211,.25), 0 0.5px 1px rgba(0,0,0,.08);
+  box-shadow: 0 0 1px 1px var(--text-regular-color);
 }
 .sidebar__search-clear {
   border: none;
