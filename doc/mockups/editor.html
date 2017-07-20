@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Editor - Alf by Aleksandar Diklic</title>
+    <link rel="stylesheet" href="editor.css">
+
+    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+
+    <script src="https://codemirror.net/lib/codemirror.js"></script>
+    <script src="https://codemirror.net/mode/sql/sql.js"></script>
+    <script src="https://codemirror.net/addon/hint/show-hint.js"></script>
+    <script src="https://codemirror.net/addon/hint/sql-hint.js"></script>
+  </head>
+
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <symbol id="i-close" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M2 30 L30 2 M30 30 L2 2" />
+        </symbol>
+
+        <symbol id="i-trash" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+        </symbol>
+        <symbol id="i-arrow-bottom" viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M6 22 L16 30 26 22 M16 30 L16 2" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="editor">
+      <div class="editor__action-bar">
+        <input type="text" class="editor__action-bar-input" placeholder="Untitled">
+        <button class="editor__action-bar-button">
+          New
+          <small>&#8679;&#8997;N</small>
+        </button>
+        <button class="editor__action-bar-button">
+          Save
+          <small>&#8997;S</small>
+        </button>
+        <button class="editor__action-bar-button editor__action-bar-button--primary">
+          Run
+          <small>&#8984;&#9166;</small>
+        </button>
+      </div>
+
+      <div class="editor__query-container">
+        <div class="editor__query-editor">
+          <textarea id="query-editor" name="query-editor">SELECT * FROM users;</textarea>
+        </div>
+
+        <div class="editor__query-results">
+          <table class="editor__query-results-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="editor__footer">
+        <button class="editor__action-bar-button">
+          <svg width="14" height="12">
+            <use xlink:href="#i-arrow-bottom"></use>
+          </svg>
+          Download CSV
+        </button>
+      </div>
+    </div>
+
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("query-editor"), {
+        theme: "alf",
+        lineNumbers: true,
+        indentWithTabs: false,
+        indentUnit: 2,
+        lineWrapping: true,
+        mode: "text/x-pgsql",
+        autofocus: true,
+        extraKeys: {"Ctrl-Space": "autocomplete"},
+        hintOptions: {
+          closeOnUnfocus: false,
+          tables: {
+            users: ["name", "score", "birthDate"],
+            countries: ["name", "opulation", "size"],
+          }
+        }
+      });
+
+      editor.on("inputRead", function(instance) {
+        if (instance.state.completionActive) {
+            return;
+        }
+        var cur = instance.getCursor();
+        var token = instance.getTokenAt(cur);
+        var string = '';
+        if (token.string.match(/^[.`\w@]\w*$/)) {
+          string = token.string;
+        }
+        if (string.length > 0) {
+          CodeMirror.commands.autocomplete(instance, null, {completeSingle: false});
+        }
+      });
+    </script>
+
+  </body>
+</html>
