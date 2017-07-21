@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// containers
-import { EditorComponent } from './containers/editor/editor.component';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
 // components
 // import { TeslaCarComponent } from './components/tesla-car/tesla-car.component';
@@ -15,16 +14,16 @@ export const ROUTES: Routes = [{
   path: 'editor',
   children: [
     { path: '', redirectTo: 'schema', pathMatch: 'full' },
-    { path: 'schema', component: EditorComponent, data: { section: 'schema' }},
-    { path: 'history', component: EditorComponent, data: { section: 'history' }},
-    { path: 'saved', component: EditorComponent, data: { section: 'saved' }},
-    { path: 'saved/:id', component: EditorComponent, data: { section: 'saved' }}
+    { path: 'schema', component: DashboardComponent, data: { section: 'schema' }},
+    { path: 'history', component: DashboardComponent, data: { section: 'history' }},
+    { path: 'saved', component: DashboardComponent, data: { section: 'saved' }},
+    { path: 'saved/:id', component: DashboardComponent, data: { section: 'saved' }}
   ]
 }];
 
 @NgModule({
   declarations: [
-    EditorComponent,
+    DashboardComponent,
     // TeslaCarComponent,
   ],
   imports: [
@@ -34,8 +33,5 @@ export const ROUTES: Routes = [{
   providers: [
     // BatteryService
   ],
-  exports: [
-    EditorComponent
-  ]
 })
-export class EditorModule {}
+export class DashboardModule {}

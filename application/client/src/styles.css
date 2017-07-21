@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color__white: #ffffff;
+  --color__ucla-blue: #587291;
+  --color__ucla-blue--light: rgba(88, 114, 145, .1);
+  --color__turquoise: #34E4EA;
+  --color__blue-green: #099EB0;
+  --color__blue-green--light: rgba(9, 158, 176, .1);
+  --color__japanese-indigo: #26414A;
+
+  --text-regular-color: var(--color__ucla-blue);
+  --text-bold-color: var(--color__japanese-indigo);
+  --action-color: var(--color__blue-green);
+  --action-color--hover: var(--color__blue-green);
+  --action-background--hover: var(--color__blue-green--light);
+
+  --text-font: 13px/16px Camphor,Open Sans,Segoe UI,sans-serif;
+  --code-font: 13px/18px Source Code Pro,monospace;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--color__white);
+  min-height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font: var(--text-font);
+  font-weight: 400;
+  font-style: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "pnum";
+  font-variant-numeric: proportional-nums;
+}

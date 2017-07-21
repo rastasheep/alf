@@ -2,11 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditorModule } from './editor/editor.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 
-export const ROUTES: Routes = [];
+export const ROUTES: Routes = [
+  { path: '', redirectTo: 'editor', pathMatch: 'full' },
+];
 
 @NgModule({
   declarations: [
@@ -14,8 +16,11 @@ export const ROUTES: Routes = [];
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES),
-    EditorModule
+    RouterModule.forRoot(
+      ROUTES,
+      { enableTracing: true } // debugging purposes only
+   ),
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
