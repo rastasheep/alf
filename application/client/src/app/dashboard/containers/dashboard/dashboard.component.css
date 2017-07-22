@@ -1,14 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
 .sidebar {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  right: 10px;
-  bottom: 0;
+  flex: 1;
+  position: relative;
+  height: 100vh;
   max-width: 400px;
-  margin: 0 auto;
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--color__white);
-  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
 }
 
 .sidebar__nav {
@@ -77,3 +77,11 @@
   display: none;
 }
 
+.editor {
+  flex: 3;
+  position: relative;
+  height: 100vh;
+  box-shadow: 0 15px 15px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--color__white);
+}

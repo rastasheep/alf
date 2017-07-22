@@ -7,6 +7,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { SchemaComponent } from './components/schema/schema.component';
 import { ExecutionHistoryComponent } from './components/execution-history/execution-history.component';
 import { ExecutionTemplatesComponent } from './components/execution-templates/execution-templates.component';
+import { QueryEditorComponent } from './components/query-editor/query-editor.component';
 
 // services
 // import { BatteryService } from './tesla-battery.service';
@@ -28,6 +29,7 @@ export const ROUTES: Routes = [{
     SchemaComponent,
     ExecutionHistoryComponent,
     ExecutionTemplatesComponent,
+    QueryEditorComponent,
   ],
   imports: [
     CommonModule,
