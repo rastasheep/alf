@@ -4,8 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
-// components
-// import { TeslaCarComponent } from './components/tesla-car/tesla-car.component';
+import { SchemaComponent } from './components/schema/schema.component';
+import { ExecutionHistoryComponent } from './components/execution-history/execution-history.component';
+import { ExecutionTemplatesComponent } from './components/execution-templates/execution-templates.component';
 
 // services
 // import { BatteryService } from './tesla-battery.service';
@@ -16,15 +17,17 @@ export const ROUTES: Routes = [{
     { path: '', redirectTo: 'schema', pathMatch: 'full' },
     { path: 'schema', component: DashboardComponent, data: { section: 'schema' }},
     { path: 'history', component: DashboardComponent, data: { section: 'history' }},
-    { path: 'saved', component: DashboardComponent, data: { section: 'saved' }},
-    { path: 'saved/:id', component: DashboardComponent, data: { section: 'saved' }}
+    { path: 'saved', component: DashboardComponent, data: { section: 'templates' }},
+    { path: 'saved/:id', component: DashboardComponent, data: { section: 'templates' }}
   ]
 }];
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    // TeslaCarComponent,
+    SchemaComponent,
+    ExecutionHistoryComponent,
+    ExecutionTemplatesComponent,
   ],
   imports: [
     CommonModule,

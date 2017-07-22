@@ -1,3 +1,33 @@
 <div>component: <b>editor</b></div>
 <div>section: <b>{{ activeSection }}</b></div>
 <div>id: <b>{{ id }}</b></div>
+
+<div class="sidebar">
+  <div class="sidebar__nav">
+    <a class="sidebar__nav-section"
+       routerLink="/editor/schema"
+       routerLinkActive="sidebar__nav-section--active">
+      Schema
+    </a>
+    <a class="sidebar__nav-section"
+       routerLink="/editor/history"
+       routerLinkActive="sidebar__nav-section--active">
+      History
+    </a>
+    <a class="sidebar__nav-section"
+       routerLink="/editor/saved"
+       routerLinkActive="sidebar__nav-section--active">
+      Templates
+    </a>
+  </div>
+
+  <app-schema *ngIf="activeSection === 'schema'">
+  </app-schema>
+
+  <app-execution-history *ngIf="activeSection === 'history'">
+  </app-execution-history>
+
+  <app-execution-templates *ngIf="activeSection === 'templates'">
+  </app-execution-templates>
+</div>
+

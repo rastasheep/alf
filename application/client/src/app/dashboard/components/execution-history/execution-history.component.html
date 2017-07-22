@@ -1,0 +1,63 @@
+<div class="sidebar__search">
+  <input class="sidebar__search-input" placeholder="Search history" type="text">
+  <button class="sidebar__search-clear">
+    <svg width="14" height="14">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-close"></use>
+    </svg>
+  </button>
+</div>
+
+<div class="history">
+  <div class="history__container">
+    <div class="history__empty-message">
+      history is not made yet, execute some queries
+    </div>
+
+    <div class="history__period">
+      today
+    </div>
+    <div class="history__execution">
+      <div class="history__execution-title-container">
+        <span class="history__execution-title">Payment card breakdown</span>
+        <span class="history__execution-action">
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-trash"></use>
+            </svg>
+          </a>
+        </span>
+      </div>
+      <div class="history__execution-code-container">
+        <div class="history__execution-code">select name, sername</div>
+        <div class="history__execution-code">from users</div>
+        <div class="history__execution-code">left join Recruits on id = Recruits.id</div>
+        <div class="history__execution-code-badge">4 lines hidden</div>
+        <div class="history__execution-code">where status like 'active'</div>
+        <div class="history__execution-code">group by 1, 2</div>
+        <div class="history__execution-code">order by created_at desc</div>
+      </div>
+    </div>
+
+    <div class="history__execution">
+      <div class="history__execution-title-container">
+        <span class="history__execution-title">Untitled</span>
+        <span class="history__execution-action">
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-trash"></use>
+            </svg>
+          </a>
+        </span>
+      </div>
+      <div class="history__execution-code-container">
+        <div class="history__execution-code">select name, sername</div>
+        <div class="history__execution-code">from users</div>
+        <div class="history__execution-code">order by created_at desc</div>
+      </div>
+    </div>
+
+    <div class="history__period history__period--last">
+      ~ fin ~
+    </div>
+  </div>
+</div>
