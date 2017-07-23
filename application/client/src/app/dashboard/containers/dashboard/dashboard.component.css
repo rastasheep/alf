@@ -1,0 +1,87 @@
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  flex: 1;
+  position: relative;
+  height: 100vh;
+  max-width: 400px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sidebar__nav {
+  display: flex;
+  margin: 20px 20px 0;
+  justify-content: space-around;
+}
+.sidebar__nav-section {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-regular-color);
+  font-size: 13px;
+  letter-spacing: .025em;
+  text-decoration: none;
+}
+.sidebar__nav-section--active {
+  color: var(--text-bold-color);
+}
+
+:host /deep/ .sidebar__search {
+  margin: 20px 20px 0;
+  background-color: var(--color__ucla-blue--light);
+  border-radius: 4px;
+  position: relative;
+}
+:host /deep/ .sidebar__search:before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 10px;
+  top: 7px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='currentcolor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><circle cx='14' cy='14' r='12'/><path d='M23 23 L30 30'/></svg>") no-repeat;
+  pointer-events: none;
+}
+:host /deep/ .sidebar__search-input {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 27px;
+  color: var(--text-bold-color);
+  width: 100%;
+  padding: 1px 28px 0;
+  border-radius: 4px;
+  transition: box-shadow .2s;
+  position: relative;
+}
+:host /deep/ .sidebar__search-input:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px var(--text-regular-color);
+}
+:host /deep/ .sidebar__search-clear {
+  border: none;
+  outline: none;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  height: 14px;
+  cursor: pointer;
+  display: none;
+}
+
+.editor {
+  flex: 3;
+  position: relative;
+  height: 100vh;
+  box-shadow: 0 15px 15px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--color__white);
+}

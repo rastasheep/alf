@@ -1,0 +1,70 @@
+<div class="sidebar__search">
+  <input class="sidebar__search-input" placeholder="Search templates" type="text">
+  <button class="sidebar__search-clear">
+    <svg width="14" height="14">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-close"></use>
+    </svg>
+  </button>
+</div>
+
+<div class="templates">
+  <div class="templates__container">
+    <div class="templates__empty-message">
+      There is no saved templates yet
+    </div>
+
+    <div class="templates__query">
+      <div class="templates__query-title-container">
+        <span class="templates__query-title">Payment card breakdown</span>
+        <span class="templates__query-action">
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-link"></use>
+            </svg>
+          </a>
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-trash"></use>
+            </svg>
+          </a>
+        </span>
+      </div>
+      <div class="templates__query-code-container">
+        <div class="templates__query-code">select name, sername</div>
+        <div class="templates__query-code">from users</div>
+        <div class="templates__query-code">left join Recruits on id = Recruits.id</div>
+        <div class="templates__query-code-badge">4 lines hidden</div>
+        <div class="templates__query-code">where status like 'active'</div>
+        <div class="templates__query-code">group by 1, 2</div>
+        <div class="templates__query-code">order by created_at desc</div>
+      </div>
+    </div>
+
+    <div class="templates__query">
+      <div class="templates__query-title-container">
+        <span class="templates__query-title">User projects</span>
+        <span class="templates__query-action">
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-link"></use>
+            </svg>
+          </a>
+          <a href="#">
+            <svg width="16" height="16">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-trash"></use>
+            </svg>
+          </a>
+        </span>
+      </div>
+      <div class="templates__query-code-container">
+        <div class="templates__query-code">select name, sername</div>
+        <div class="templates__query-code">from users</div>
+        <div class="templates__query-code">order by created_at desc</div>
+      </div>
+    </div>
+
+    <div class="templates__end">
+      ~ fin ~
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="sidebar">
+  <div class="sidebar__nav">
+    <a class="sidebar__nav-section"
+       routerLink="/editor/schema"
+       routerLinkActive="sidebar__nav-section--active">
+      Schema
+    </a>
+    <a class="sidebar__nav-section"
+       routerLink="/editor/history"
+       routerLinkActive="sidebar__nav-section--active">
+      History
+    </a>
+    <a class="sidebar__nav-section"
+       routerLink="/editor/saved"
+       routerLinkActive="sidebar__nav-section--active">
+      Templates
+    </a>
+  </div>
+
+  <app-schema *ngIf="activeSection === 'schema'">
+  </app-schema>
+
+  <app-execution-history *ngIf="activeSection === 'history'">
+  </app-execution-history>
+
+  <app-execution-templates *ngIf="activeSection === 'templates'">
+  </app-execution-templates>
+</div>
+
+<div class="editor">
+  <app-query-editor>
+  </app-query-editor>
+
+  <div class="editor__footer">
+  </div>
+</div>

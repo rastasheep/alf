@@ -4,10 +4,11 @@ import 'rxjs/add/operator/takeUntil';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'app-editor-page',
-  templateUrl: './editor.component.html'
+  selector: 'app-dashboard',
+  styleUrls: ['./dashboard.component.css'],
+  templateUrl: './dashboard.component.html'
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   sub: any;
   activeSection: string;
