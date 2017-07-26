@@ -13,28 +13,20 @@
       No column or table names matched.
     </div>
 
-    <div class="schema__table-name">
-      balance_transaction_fee_details
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">balance_transaction_id</span>
-      <span class="schema__column-type">varchar</span>
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">amount</span>
-      <span class="schema__column-type">bigint</span>
+    <div *ngFor="let table of schema" >
+      <div class="schema__table-name"
+        [textContent]="table.tableName">
+      </div>
+      <div class="schema__column"
+        *ngFor="let column of table.columns">
+        <span class="schema__column-name"
+          [textContent]="column.columnName">
+        </span>
+        <span class="schema__column-type"
+          [textContent]="column.dataType">
+        </span>
+      </div>
     </div>
 
-    <div class="schema__table-name">
-      balance_transactions
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">id</span>
-      <span class="schema__column-type">varchar</span>
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">amount</span>
-      <span class="schema__column-type">bigint</span>
-    </div>
   </div>
 </div>
