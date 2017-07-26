@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
@@ -8,6 +11,10 @@ import { SchemaComponent } from './components/schema/schema.component';
 import { ExecutionHistoryComponent } from './components/execution-history/execution-history.component';
 import { ExecutionTemplatesComponent } from './components/execution-templates/execution-templates.component';
 import { QueryEditorComponent } from './components/query-editor/query-editor.component';
+
+import { SchemaReducer } from './reducers/schema.reducer';
+import { SchemaEffects } from './effects/schema.effects';
+import { SchemaService } from './services/schema.service';
 
 // services
 // import { BatteryService } from './tesla-battery.service';
@@ -33,10 +40,16 @@ export const ROUTES: Routes = [{
   ],
   imports: [
     CommonModule,
+    HttpModule,
     RouterModule.forRoot(ROUTES),
+    StoreModule.forFeature('dashboard', {
+      schema: SchemaReducer,
+    }),
+    EffectsModule.forFeature([SchemaEffects]),
+
   ],
   providers: [
-    // BatteryService
+    SchemaService,
   ],
 })
 export class DashboardModule {}
