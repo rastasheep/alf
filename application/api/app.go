@@ -45,10 +45,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	s.Handle("/schema", s.schemaHandler)
-	s.Handle("/executions", s.executionHandler)
-	s.Handle("/results", s.resultHandler)
-	s.Handle("/templates", s.templateHandler)
+	s.Handle("/api/schema", s.schemaHandler)
+	s.Handle("/api/executions", s.executionHandler)
+	s.Handle("/api/results", s.resultHandler)
+	s.Handle("/api/templates", s.templateHandler)
 
 	logger.Printf("running server in %s mode on port %s", *env, *port)
 
