@@ -12,6 +12,7 @@ import { LoadAction } from '../../actions/schema.actions';
 })
 export class SchemaComponent implements OnInit, OnDestroy {
   @Input() schema: SchemaTable[];
+  public schemaFilter = '';
 
   constructor(private store: Store<any>)  { }
 

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -11,6 +12,8 @@ import { SchemaComponent } from './components/schema/schema.component';
 import { ExecutionHistoryComponent } from './components/execution-history/execution-history.component';
 import { ExecutionTemplatesComponent } from './components/execution-templates/execution-templates.component';
 import { QueryEditorComponent } from './components/query-editor/query-editor.component';
+
+import { FilterPipe } from './pipes/filter.pipe';
 
 import { SchemaReducer } from './reducers/schema.reducer';
 import { SchemaEffects } from './effects/schema.effects';
@@ -32,6 +35,7 @@ export const ROUTES: Routes = [{
 
 @NgModule({
   declarations: [
+    FilterPipe,
     DashboardComponent,
     SchemaComponent,
     ExecutionHistoryComponent,
@@ -42,6 +46,7 @@ export const ROUTES: Routes = [{
     CommonModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
+    FormsModule,
     StoreModule.forFeature('dashboard', {
       schema: SchemaReducer,
     }),
