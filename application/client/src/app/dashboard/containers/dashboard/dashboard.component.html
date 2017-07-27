@@ -17,7 +17,9 @@
     </a>
   </div>
 
-  <app-schema *ngIf="activeSection === 'schema'">
+  <app-schema
+    *ngIf="activeSection === 'schema'"
+    [schema]="schema$ | async">
   </app-schema>
 
   <app-execution-history *ngIf="activeSection === 'history'">

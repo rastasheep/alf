@@ -1,6 +1,14 @@
 <div class="sidebar__search">
-  <input class="sidebar__search-input" placeholder="Search columns" type="text">
-  <button class="sidebar__search-clear">
+  <input
+    class="sidebar__search-input"
+    placeholder="Search columns"
+    type="text"
+    [(ngModel)]="schemaFilter">
+
+  <button
+    class="sidebar__search-clear"
+    (click)="schemaFilter=''"
+    *ngIf="schemaFilter.length > 0">
     <svg width="14" height="14">
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-close"></use>
     </svg>
@@ -13,28 +21,20 @@
       No column or table names matched.
     </div>
 
-    <div class="schema__table-name">
-      balance_transaction_fee_details
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">balance_transaction_id</span>
-      <span class="schema__column-type">varchar</span>
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">amount</span>
-      <span class="schema__column-type">bigint</span>
+    <div *ngFor="let table of schema" >
+      <div class="schema__table-name"
+        [textContent]="table.tableName">
+      </div>
+      <div class="schema__column"
+        *ngFor="let column of table.columns | filter: {columnName: schemaFilter}">
+        <span class="schema__column-name"
+          [textContent]="column.columnName">
+        </span>
+        <span class="schema__column-type"
+          [textContent]="column.dataType">
+        </span>
+      </div>
     </div>
 
-    <div class="schema__table-name">
-      balance_transactions
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">id</span>
-      <span class="schema__column-type">varchar</span>
-    </div>
-    <div class="schema__column">
-      <span class="schema__column-name">amount</span>
-      <span class="schema__column-type">bigint</span>
-    </div>
   </div>
 </div>
