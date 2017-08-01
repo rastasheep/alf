@@ -15,7 +15,7 @@ import { SchemaTable } from '../models/schema.model';
 @Injectable()
 export class SchemaEffects {
   @Effect()
-  search$: Observable<Action> = this.actions$
+  load$: Observable<Action> = this.actions$
     .ofType(SchemaActions.LOAD)
     .map(toPayload)
     .switchMap(_ => {
